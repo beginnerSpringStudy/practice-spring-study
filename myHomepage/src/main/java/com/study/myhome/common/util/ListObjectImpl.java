@@ -12,10 +12,12 @@ public class ListObjectImpl<T> implements ListObject<T> {
 
 	private PaginationInfo paginationInfo;
 
-	public ListObjectImpl(List<T> list, int totalCnt) {
+	public ListObjectImpl(List<T> list, int totalCnt, PaginationInfo paginationInfo) {
 		super();
 		this.list = list;
 		this.totalCnt = totalCnt;
+		// 토탈 카운트 갯수 추가
+		paginationInfo.setTotalRecordCount(this.totalCnt);
 	}
 
 	public List<T> getList() {
@@ -36,13 +38,5 @@ public class ListObjectImpl<T> implements ListObject<T> {
 
 	public PaginationInfo getPaginationInfo() {
 		return paginationInfo;
-	}
-
-	public void setPaginationInfo(PaginationInfo paginationInfo) {
-		if(paginationInfo != null) {
-			// 페이징 값 계산
-			paginationInfo.setTotalRecordCount(this.totalCnt);
-			this.paginationInfo = paginationInfo;
-		}
 	}
 }

@@ -16,7 +16,6 @@ public class MenuServiceImpl implements MenuService {
 	@Autowired
 	private MenuDAO menuDAO;
 
-	@Override
 	public MenuVO findMenus(MenuVO menuVO) throws Exception {
 		// TODO Auto-generated method stub
 		MenuVO menu;

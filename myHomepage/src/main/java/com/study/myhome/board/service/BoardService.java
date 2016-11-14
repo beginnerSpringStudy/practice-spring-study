@@ -4,6 +4,8 @@ import org.springframework.web.multipart.MultipartRequest;
 
 import com.study.myhome.common.util.ListObject;
 
+import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
+
 public interface BoardService {
 
 	/**
@@ -12,10 +14,11 @@ public interface BoardService {
 	 * @author 정명성
 	 * @create date : 2016. 11. 7.
 	 * @param boardVO
+	 * @param paginationInfo 
 	 * @return
 	 * @throws Exception
 	 */
-	public ListObject<BoardVO> selectBoardList(BoardVO boardVO) throws Exception;
+	public ListObject<BoardVO> selectBoardList(BoardVO boardVO, PaginationInfo paginationInfo) throws Exception;
 
 	/**
 	 * 게시글 조회

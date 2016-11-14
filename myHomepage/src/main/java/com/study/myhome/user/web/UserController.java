@@ -1,7 +1,5 @@
 package com.study.myhome.user.web;
 
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.beanutils.BeanUtils;
@@ -14,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.study.myhome.common.service.PaginationInfoMapping;
+import com.study.myhome.common.util.ListObject;
 import com.study.myhome.user.service.UserService;
 import com.study.myhome.user.service.UserVO;
 
@@ -52,17 +51,9 @@ public class UserController {
 
 		BeanUtils.copyProperties(paginationInfo, userVO);
 
-		// list와 전체 페이징 갯수를 가져와야 한다.
-		Map resultMap = userService.findUsers(userVO);
-		// total 갯수
-		int totalCnt = (int) resultMap.get("totalCnt");
-
-		// 페이징 된 리스트 갯수
-		modelMap.addAttribute("list", resultMap.get("list"));
-
-		paginationInfo.setTotalRecordCount(totalCnt);
-		// 페이징 정보
-		modelMap.addAttribute("paginationInfo", paginationInfo);
+		ListObject<UserVO> listObj = userService.findUsers(userVO, paginationInfo);
+		
+		modelMap.addAttribute("listObj", listObj);
 
 		return "user/list.myhome";
 	}

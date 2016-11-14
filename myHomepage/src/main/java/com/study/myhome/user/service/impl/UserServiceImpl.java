@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.study.myhome.common.exception.BadRequestException;
+import com.study.myhome.common.util.ListObject;
+import com.study.myhome.common.util.ListObjectImpl;
 import com.study.myhome.enums.Authority;
 import com.study.myhome.menu.service.MenuService;
 import com.study.myhome.menu.service.MenuVO;
@@ -15,6 +17,8 @@ import com.study.myhome.user.service.UserAuthorityService;
 import com.study.myhome.user.service.UserAuthorityVO;
 import com.study.myhome.user.service.UserService;
 import com.study.myhome.user.service.UserVO;
+
+import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -42,6 +46,10 @@ public class UserServiceImpl implements UserService {
 		return map;
 	}
 
+	public ListObject<UserVO> findUsers(UserVO userVO, PaginationInfo paginationInfo) throws Exception {
+		return new ListObjectImpl<UserVO>(userDAO.findUsers(userVO), userDAO.getTotalUser(), paginationInfo);
+	}
+
 	/**
 	 * 사용자 정보 입력
 	 * 
@@ -49,8 +57,7 @@ public class UserServiceImpl implements UserService {
 	 * @param userVO
 	 * @throws Exception
 	 */
-	public void insertUsers(UserVO userVO, UserAuthorityVO userAuthorityVO)
-			throws Exception {
+	public void insertUsers(UserVO userVO, UserAuthorityVO userAuthorityVO) throws Exception {
 		try {
 			userDAO.insertUser(userVO);
 			userAuthorityService.insertUserAuthority(userAuthorityVO);
@@ -69,10 +76,10 @@ public class UserServiceImpl implements UserService {
 	 */
 	public UserVO findUser(UserVO userVO) throws Exception {
 		try {
-			
+
 			UserVO user = userDAO.findUser(userVO);
 			if (user == null) {
-				throw new BadRequestException("사용자가 존재하지 않습니다. username : "	+ userVO.getUsername());
+				throw new BadRequestException("사용자가 존재하지 않습니다. username : " + userVO.getUsername());
 			}
 			// 권한 가져오기
 			setUserAuthority(user);
@@ -91,6 +98,7 @@ public class UserServiceImpl implements UserService {
 
 	/**
 	 * 사용자 권한
+	 * 
 	 * @author 정명성
 	 * @create date : 2016. 10. 31.
 	 * @param user
@@ -98,16 +106,16 @@ public class UserServiceImpl implements UserService {
 	 */
 	private void setUserAuthority(UserVO user) throws Exception {
 		UserAuthorityVO userAuthority = userAuthorityService.findUserAuthority(user);
-		if(userAuthority == null) {
+		if (userAuthority == null) {
 			throw new BadRequestException("권한 정보가 없습니다. username : " + user.getUsername());
 		}
 		user.setUserAuthority(userAuthority);
 	}
-	
+
 	/**
 	 * 메뉴 저장
-	 * @author 정명성
-	 * create date : 2016. 10. 24.
+	 * 
+	 * @author 정명성 create date : 2016. 10. 24.
 	 * @param userAuthority
 	 * @throws Exception
 	 */

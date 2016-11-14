@@ -14,6 +14,7 @@ import com.study.myhome.common.util.ListObjectImpl;
 import egovframework.com.cmm.service.EgovFileMngService;
 import egovframework.com.cmm.service.EgovFileMngUtil;
 import egovframework.com.cmm.service.FileVO;
+import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
 
 @Service
 public class BoardServiceImpl implements BoardService {
@@ -30,10 +31,10 @@ public class BoardServiceImpl implements BoardService {
 	/**
 	 * 게시판 리스트
 	 */
-	public ListObject<BoardVO> selectBoardList(BoardVO boardVO) throws Exception {
+	public ListObject<BoardVO> selectBoardList(BoardVO boardVO, PaginationInfo paginationInfo) throws Exception {
 		List<BoardVO> list = boardDAO.selectBoardList(boardVO);
 		int totalCount = boardDAO.selectBoardListCnt(boardVO);
-		ListObject<BoardVO> listObj = new ListObjectImpl<BoardVO>(list, totalCount);
+		ListObject<BoardVO> listObj = new ListObjectImpl<BoardVO>(list, totalCount, paginationInfo);
 		return listObj;
 	}
 	

@@ -27,8 +27,7 @@ public class BoardController {
 		BeanUtils.copyProperties(paginationInfo, boardVO);
 
 		// list와 전체 페이징 갯수를 가져와야 한다.
-		ListObject<BoardVO> listObj = boardService.selectBoardList(boardVO);
-		listObj.setPaginationInfo(paginationInfo);
+		ListObject<BoardVO> listObj = boardService.selectBoardList(boardVO, paginationInfo);
 		modelMap.addAttribute("listObj", listObj);
 		
 		return "board/list.myhome";
