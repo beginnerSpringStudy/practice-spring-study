@@ -13,7 +13,7 @@ public class SessionCheckInterceptor extends WebContentInterceptor {
 
 	public void isLogined() throws ModelAndViewDefiningException {
 		if (!EgovUserDetailsHelper.isAuthenticated()) {
-			LOG.info("user is not logined");
+			LOG.info("user is not login");
 			ModelAndView modelAndView = new ModelAndView("redirect:/index.do");
 			throw new ModelAndViewDefiningException(modelAndView);
 		}

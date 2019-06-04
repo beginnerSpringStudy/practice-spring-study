@@ -33,8 +33,8 @@ import egovframework.com.cmm.util.EgovUserDetailsHelper;
  * </pre>
  */
 
-public class NomalUserSessionInterceptor extends SessionCheckInterceptor {
-	private final static Logger LOG = LoggerFactory.getLogger(NomalUserSessionInterceptor.class);
+public class NormalUserSessionInterceptor extends SessionCheckInterceptor {
+	private final static Logger LOG = LoggerFactory.getLogger(NormalUserSessionInterceptor.class);
 
 	/**
 	 * 세션에 계정정보(LoginVO)가 있는지 여부로 인증 여부를 체크한다. 계정정보(LoginVO)가 없다면, 로그인 페이지로
@@ -48,14 +48,14 @@ public class NomalUserSessionInterceptor extends SessionCheckInterceptor {
 		// 로그인 세션 객체 가져옴.
 		LoginVO loginVO = (LoginVO) EgovUserDetailsHelper.getAuthenticatedUser();
 
-		isNomalUser(loginVO);
+		isNormalUser(loginVO);
 
 		return true;
 	}
 
-	private void isNomalUser(LoginVO loginVO) throws ModelAndViewDefiningException {
-		if (!loginVO.getUserAuthority().getAuthority().equals(Authority.NONMEMBER)) {
-			LOG.info("user is not nomal user");
+	private void isNormalUser(LoginVO loginVO) throws ModelAndViewDefiningException {
+		if (!loginVO.getUserAuthority().getAuthority().equals(Authority.MEMBER)) {
+			LOG.info("user is not normal user");
 			ModelAndView modelAndView = new ModelAndView("redirect:/index.do");
 			throw new ModelAndViewDefiningException(modelAndView);
 		}

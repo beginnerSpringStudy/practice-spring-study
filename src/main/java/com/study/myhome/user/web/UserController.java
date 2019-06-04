@@ -24,9 +24,6 @@ public class UserController {
 	private static Logger LOG = LoggerFactory.getLogger(UserController.class);
 
 	@Autowired
-	private PaginationInfoMapping mapper;
-
-	@Autowired
 	private UserService userService;
 
 	/**
@@ -41,8 +38,7 @@ public class UserController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/user/list.do")
-	public String userList(HttpServletRequest request, PaginationInfo paginationInfo, UserVO userVO, ModelMap modelMap)
-			throws Exception {
+	public String userList(HttpServletRequest request, PaginationInfo paginationInfo, UserVO userVO, ModelMap modelMap) throws Exception {
 
 		/**
 		 * paginationInfo 에는 페이징에 필요한 값들이 셋팅되어있다. 페이징 계산 식에 대해서는 해당 클래스를 열어보면

@@ -29,7 +29,7 @@ public class MenuTest {
 	@Test
 	public void test1GetMenu() throws Exception {
 		MenuVO menuVO = new MenuVO();
-		menuVO.setMenu_idx(1);
+		menuVO.setMenuIdx(1);
 		menuVO = menuService.findMenus(menuVO);
 
 		Assert.notNull(menuVO);
@@ -39,7 +39,7 @@ public class MenuTest {
 	@Test(expected = BadRequestException.class)
 	public void test2GetMenuError() throws Exception {
 		MenuVO menuVO = new MenuVO();
-		menuVO.setMenu_idx(4);
+		menuVO.setMenuIdx(4);
 		menuVO = menuService.findMenus(menuVO);
 	}
 }

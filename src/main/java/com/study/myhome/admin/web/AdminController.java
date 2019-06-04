@@ -1,10 +1,10 @@
-package com.study.myhome.manage.web;
+package com.study.myhome.admin.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class ManageController {
+public class AdminController {
 	
 	/**
 	 * 테스트 관리자 페이지
@@ -12,9 +12,9 @@ public class ManageController {
 	 * @create date : 2016. 10. 26.
 	 * @return
 	 */
-	@RequestMapping(value = "/manager/index.do")
+	@RequestMapping(value = "/admin/index.do")
 	public String manageIndex() {
 		
-		return "manager/index.myhome";
+		return "admin/index.myhome";
 	}
 }

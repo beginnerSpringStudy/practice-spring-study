@@ -18,6 +18,7 @@ public class ListObjectImpl<T> implements ListObject<T> {
 		this.totalCnt = totalCnt;
 		// 토탈 카운트 갯수 추가
 		paginationInfo.setTotalRecordCount(this.totalCnt);
+		this.paginationInfo = paginationInfo;
 	}
 
 	public List<T> getList() {
@@ -38,5 +39,14 @@ public class ListObjectImpl<T> implements ListObject<T> {
 
 	public PaginationInfo getPaginationInfo() {
 		return paginationInfo;
+	}
+
+	@Override
+	public String toString() {
+		return "ListObjectImpl{" +
+				"list=" + list +
+				", totalCnt=" + totalCnt +
+				", paginationInfo=" + paginationInfo +
+				'}';
 	}
 }

@@ -5,9 +5,9 @@ import org.apache.ibatis.type.Alias;
 @Alias("MenuDetailVO")
 public class MenuDetailVO {
 
-	private int menu_idx;
+	private int menuIdx;
 
-	private String menu_name;
+	private String menuName;
 
 	private String url;
 
@@ -21,20 +21,20 @@ public class MenuDetailVO {
 
 	private int order_idx;
 
-	public int getMenu_idx() {
-		return menu_idx;
+	public int getMenuIdx() {
+		return menuIdx;
 	}
 
-	public void setMenu_idx(int menu_idx) {
-		this.menu_idx = menu_idx;
+	public void setMenuIdx(int menuIdx) {
+		this.menuIdx = menuIdx;
 	}
 
-	public String getMenu_name() {
-		return menu_name;
+	public String getMenuName() {
+		return menuName;
 	}
 
-	public void setMenu_name(String menu_name) {
-		this.menu_name = menu_name;
+	public void setMenuName(String menuName) {
+		this.menuName = menuName;
 	}
 
 	public int getOrder_idx() {
@@ -49,9 +49,9 @@ public class MenuDetailVO {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + menu_idx;
+		result = prime * result + menuIdx;
 		result = prime * result
-				+ ((menu_name == null) ? 0 : menu_name.hashCode());
+				+ ((menuName == null) ? 0 : menuName.hashCode());
 		result = prime * result + order_idx;
 		result = prime * result + ((url == null) ? 0 : url.hashCode());
 		return result;
@@ -66,12 +66,12 @@ public class MenuDetailVO {
 		if (getClass() != obj.getClass())
 			return false;
 		MenuDetailVO other = (MenuDetailVO) obj;
-		if (menu_idx != other.menu_idx)
+		if (menuIdx != other.menuIdx)
 			return false;
-		if (menu_name == null) {
-			if (other.menu_name != null)
+		if (menuName == null) {
+			if (other.menuName != null)
 				return false;
-		} else if (!menu_name.equals(other.menu_name))
+		} else if (!menuName.equals(other.menuName))
 			return false;
 		if (order_idx != other.order_idx)
 			return false;

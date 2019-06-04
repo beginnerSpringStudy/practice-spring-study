@@ -11,10 +11,6 @@ import com.study.myhome.common.service.Pageable;
 @Alias("UserVO")
 public class UserVO extends Pageable {
 
-	{
-		joinDate = new Date();
-	}
-
 	// @Size(min = 4, max = 10)
 	@NotNull
 	private String username;

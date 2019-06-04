@@ -9,9 +9,9 @@ import com.study.myhome.enums.Authority;
 @Alias("MenuVO")
 public class MenuVO {
 
-	private int menu_idx;
+	private int menuIdx;
 
-	private String menu_name;
+	private String menuName;
 	// 메뉴 상세
 	private List<MenuDetailVO> menuDetails;
 
@@ -21,23 +21,23 @@ public class MenuVO {
 
 	public MenuVO(Authority authorityMenu) {
 		super();
-		this.menu_idx = authorityMenu.ordinal();
+		this.menuIdx = authorityMenu.ordinal();
 	}
 
-	public int getMenu_idx() {
-		return menu_idx;
+	public int getMenuIdx() {
+		return menuIdx;
 	}
 
-	public void setMenu_idx(int menu_idx) {
-		this.menu_idx = menu_idx;
+	public void setMenuIdx(int menuIdx) {
+		this.menuIdx = menuIdx;
 	}
 
-	public String getMenu_name() {
-		return menu_name;
+	public String getMenuName() {
+		return menuName;
 	}
 
-	public void setMenu_name(String menu_name) {
-		this.menu_name = menu_name;
+	public void setMenuName(String menuName) {
+		this.menuName = menuName;
 	}
 
 	public List<MenuDetailVO> getMenuDetails() {
@@ -54,9 +54,9 @@ public class MenuVO {
 		int result = 1;
 		result = prime * result
 				+ ((menuDetails == null) ? 0 : menuDetails.hashCode());
-		result = prime * result + menu_idx;
+		result = prime * result + menuIdx;
 		result = prime * result
-				+ ((menu_name == null) ? 0 : menu_name.hashCode());
+				+ ((menuName == null) ? 0 : menuName.hashCode());
 		return result;
 	}
 
@@ -74,12 +74,12 @@ public class MenuVO {
 				return false;
 		} else if (!menuDetails.equals(other.menuDetails))
 			return false;
-		if (menu_idx != other.menu_idx)
+		if (menuIdx != other.menuIdx)
 			return false;
-		if (menu_name == null) {
-			if (other.menu_name != null)
+		if (menuName == null) {
+			if (other.menuName != null)
 				return false;
-		} else if (!menu_name.equals(other.menu_name))
+		} else if (!menuName.equals(other.menuName))
 			return false;
 		return true;
 	}

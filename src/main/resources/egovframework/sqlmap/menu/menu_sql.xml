@@ -5,18 +5,18 @@
 	
 	<!-- 메뉴 가져오기 -->
 	<select id="selectMenu" parameterType="MenuVO" resultType="MenuVO">
-		SELECT 		MENU_IDX,
-					MENU_NAME
+		SELECT 		MENU_IDX menuIdx,
+					MENU_NAME menuName
 			FROM MENU
-			 WHERE MENU_IDX = #{menu_idx}
+			 WHERE MENU_IDX = #{menuIdx}
 	</select>
 
 	<!-- 하위 메뉴 가져오기 -->
 	<select id="selectMenuDetails" parameterType="java.lang.Integer" resultType="MenuDetailVO">
-		SELECT 	MENU_IDX,
-				MENU_NAME,
+		SELECT 	MENU_IDX menuIdx,
+				MENU_NAME menuName,
 				URL,
-				ORDER_NUM
+				ORDER_NUM orderNum
 		  FROM MENU_DETAIL
 		   WHERE MENU_IDX = #{value}
 	</select>

@@ -1,6 +1,8 @@
 package com.study.myhome.board.web;
 
 import org.apache.commons.beanutils.BeanUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -15,8 +17,10 @@ import com.study.myhome.common.util.ListObject;
 import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
 
 @Controller
-@RequestMapping(value = {"/user", "/manager"})
+@RequestMapping(value = {"user", "admin"})
 public class BoardController {
+
+  private static final Logger log = LoggerFactory.getLogger(BoardController.class);
 
 	@Autowired
 	private BoardService boardService;
@@ -28,8 +32,9 @@ public class BoardController {
 
 		// list와 전체 페이징 갯수를 가져와야 한다.
 		ListObject<BoardVO> listObj = boardService.selectBoardList(boardVO, paginationInfo);
+
 		modelMap.addAttribute("listObj", listObj);
-		
+    log.info("listObj : {}", listObj);
 		return "board/list.myhome";
 	}
 	

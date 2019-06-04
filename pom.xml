@@ -20,6 +20,8 @@
 		<spring.maven.artifact.version>4.0.9.RELEASE</spring.maven.artifact.version>
 		<egovframework.rte.version>3.5.0</egovframework.rte.version>
 		<org.apache.tiles-version>3.0.7</org.apache.tiles-version>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
 	</properties>
 
 	<repositories>
