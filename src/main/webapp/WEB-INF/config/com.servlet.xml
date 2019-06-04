@@ -15,18 +15,14 @@
   <!-- jeus에서 문제가 발생된다. 해당 내용은 <mvc:default-servlet-handler default-servlet-name="WorkerServlet"></mvc:default-servlet-handler> -->
   <!-- 패키지 내 Controller, Service, Repository 클래스의 auto detect를 위한 mvc 설정 -->
   <context:component-scan base-package="egovframework, com">
-    <context:include-filter type="annotation"
-      expression="org.springframework.stereotype.Controller"/>
-    <context:exclude-filter type="annotation"
-      expression="org.springframework.stereotype.Service"/>
-    <context:exclude-filter type="annotation"
-      expression="org.springframework.stereotype.Repository"/>
+    <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+    <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
   </context:component-scan>
 
   <!-- view Resolver 설정 -->
   <!-- 서블릿컨네이너상의 exception에 대한 오류 페이지를 연결하는 mvc 설정 -->
-  <bean
-    class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+  <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
     <property name="exceptionMappings">
       <props>
         <!-- <prop key="org.springframework.dao.DataAccessException">cmm/error/dataAccessFailure</prop>
@@ -37,14 +33,11 @@
   </bean>
 
   <!-- 타일즈 설정 -->
-  <bean id="tilesViewResolver"
-    class="org.springframework.web.servlet.view.UrlBasedViewResolver">
-    <property name="viewClass"
-      value="org.springframework.web.servlet.view.tiles3.TilesView"/>
+  <bean id="tilesViewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+    <property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView"/>
     <property name="order" value="1"/>
   </bean>
-  <bean id="tilesConfigurer"
-    class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+  <bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
     <property name="definitions">
       <list>
         <value>classpath:/egovframework/spring/com/tiles-layouts.xml</value>
@@ -66,7 +59,7 @@
     <mvc:interceptor>
       <mvc:mapping path="/**"/>
       <mvc:exclude-mapping path="/redis/**"/>
-      <mvc:exclude-mapping path="/join/action.do"/>
+      <mvc:exclude-mapping path="**/action.do"/>
       <bean class="com.study.myhome.common.interceptor.MenuInfoInterceptor"/>
     </mvc:interceptor>
     <!-- 권한 체크 -->

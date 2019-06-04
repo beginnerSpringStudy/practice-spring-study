@@ -67,8 +67,8 @@
   }
 
   function getPageList(page) {
-    var f = document.frm
-    f.action = "./list.do"
+    var f = document.frm;
+    f.action = "./list.do";
     f.p.value = page;
     f.submit();
   }

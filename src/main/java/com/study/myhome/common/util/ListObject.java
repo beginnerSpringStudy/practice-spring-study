@@ -1,13 +1,13 @@
 package com.study.myhome.common.util;
 
+import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
 import java.util.List;
 
-import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
+public interface ListObject<T> {
 
-public interface ListObject <T> {
-	public List<T> getList();
-	
-	public PaginationInfo getPaginationInfo();
-	
-	public int getTotalCnt();
+  List<T> getList();
+
+  PaginationInfo getPaginationInfo();
+
+  int getTotalCnt();
 }

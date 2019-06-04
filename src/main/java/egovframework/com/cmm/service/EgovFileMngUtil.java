@@ -12,6 +12,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -46,14 +47,126 @@ import org.springframework.web.multipart.MultipartFile;
 public class EgovFileMngUtil {
 
   public static final int BUFF_SIZE = 2048;
-
+  private static final Logger LOGGER = LoggerFactory.getLogger(EgovFileMngUtil.class);
   @Resource(name = "propertiesService")
   protected EgovPropertyService propertyService;
-
   @Resource(name = "egovFileIdGnrService")
   private EgovIdGnrService idgenService;
 
-  private static final Logger LOGGER = LoggerFactory.getLogger(EgovFileMngUtil.class);
+  /**
+   * 서버의 파일을 다운로드한다.
+   */
+  public static void downFile(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+    String downFileName = EgovStringUtil.isNullToString(request.getAttribute("downFile")).replaceAll("..", "");
+    String orgFileName = EgovStringUtil.isNullToString(request.getAttribute("orgFileName")).replaceAll("..", "");
+
+	/*if ((String)request.getAttribute("downFile") == null) {
+	    downFileName = "";
+	} else {
+	    downFileName = EgovStringUtils.isNullToString(request.getAttribute("downFile"));
+	}*/
+
+	/*if ((String)request.getAttribute("orgFileName") == null) {
+	    orgFileName = "";
+	} else {
+	    orgFileName = (String)request.getAttribute("orginFile");
+	}*/
+
+    File file = new File(downFileName);
+
+    if (!file.exists()) {
+      throw new FileNotFoundException(downFileName);
+    }
+
+    if (!file.isFile()) {
+      throw new FileNotFoundException(downFileName);
+    }
+
+    byte[] b = new byte[BUFF_SIZE]; //buffer size 2K.
+    String fName = (new String(orgFileName.getBytes(), StandardCharsets.UTF_8)).replaceAll("\r\n", "");
+    response.setContentType("application/x-msdownload");
+    response.setHeader("Content-Disposition:", "attachment; filename=" + fName);
+    response.setHeader("Content-Transfer-Encoding", "binary");
+    response.setHeader("Pragma", "no-cache");
+    response.setHeader("Expires", "0");
+
+    BufferedInputStream fin = null;
+    BufferedOutputStream outs = null;
+
+    try {
+      fin = new BufferedInputStream(new FileInputStream(file));
+      outs = new BufferedOutputStream(response.getOutputStream());
+      int read = 0;
+
+      while ((read = fin.read(b)) != -1) {
+        outs.write(b, 0, read);
+      }
+    } finally {
+      if (outs != null) {
+        try {
+          outs.close();
+        } catch (Exception ignore) {
+          LOGGER.debug("IGNORED: {}", ignore.getMessage());
+        }
+      }
+      if (fin != null) {
+        try {
+          fin.close();
+        } catch (Exception ignore) {
+          LOGGER.debug("IGNORED: {}", ignore.getMessage());
+        }
+      }
+    }
+  }
+
+  /**
+   * 파일을 실제 물리적인 경로에 생성한다.
+   */
+  protected static void writeFile(MultipartFile file, String newName, String stordFilePath) throws Exception {
+    InputStream stream = null;
+    OutputStream bos = null;
+    newName = EgovStringUtil.isNullToString(newName).replaceAll("..", "");
+    stordFilePath = EgovStringUtil.isNullToString(stordFilePath).replaceAll("..", "");
+    try {
+      stream = file.getInputStream();
+      File cFile = new File(stordFilePath);
+
+      if (!cFile.isDirectory()) {
+        cFile.mkdir();
+      }
+
+      bos = new FileOutputStream(stordFilePath + File.separator + newName);
+
+      int bytesRead = 0;
+      byte[] buffer = new byte[BUFF_SIZE];
+
+      while ((bytesRead = stream.read(buffer, 0, BUFF_SIZE)) != -1) {
+        bos.write(buffer, 0, bytesRead);
+      }
+    } catch (FileNotFoundException fnfe) {
+      LOGGER.debug("fnfe: {}", fnfe);
+    } catch (IOException ioe) {
+      LOGGER.debug("ioe: {}", ioe);
+    } catch (Exception e) {
+      LOGGER.debug("e: {}", e);
+    } finally {
+      if (bos != null) {
+        try {
+          bos.close();
+        } catch (Exception ignore) {
+          LOGGER.debug("IGNORED: {}", ignore.getMessage());
+        }
+      }
+      if (stream != null) {
+        try {
+          stream.close();
+        } catch (Exception ignore) {
+          LOGGER.debug("IGNORED: {}", ignore.getMessage());
+        }
+      }
+    }
+  }
 
   /**
    * 첨부파일에 대한 목록 정보를 취득한다.
@@ -132,123 +245,6 @@ public class EgovFileMngUtil {
   }
 
   /**
-   * 첨부파일을 서버에 저장한다.
-   */
-  protected void writeUploadedFile(MultipartFile file, String newName, String stordFilePath) throws Exception {
-    InputStream stream = null;
-    OutputStream bos = null;
-    String stordFilePathReal = (stordFilePath == null ? "" : stordFilePath).replaceAll("..", "");
-    try {
-      stream = file.getInputStream();
-      File cFile = new File(stordFilePathReal);
-
-      if (!cFile.isDirectory()) {
-        boolean _flag = cFile.mkdir();
-        if (!_flag) {
-          throw new IOException("Directory creation Failed ");
-        }
-      }
-
-      bos = new FileOutputStream(stordFilePathReal + File.separator + newName);
-
-      int bytesRead = 0;
-      byte[] buffer = new byte[BUFF_SIZE];
-
-      while ((bytesRead = stream.read(buffer, 0, BUFF_SIZE)) != -1) {
-        bos.write(buffer, 0, bytesRead);
-      }
-    } catch (FileNotFoundException fnfe) {
-      LOGGER.debug("fnfe: {}", fnfe);
-    } catch (IOException ioe) {
-      LOGGER.debug("ioe: {}", ioe);
-    } catch (Exception e) {
-      LOGGER.debug("e: {}", e);
-    } finally {
-      if (bos != null) {
-        try {
-          bos.close();
-        } catch (Exception ignore) {
-          LOGGER.debug("IGNORED: {}", ignore.getMessage());
-        }
-      }
-      if (stream != null) {
-        try {
-          stream.close();
-        } catch (Exception ignore) {
-          LOGGER.debug("IGNORED: {}", ignore.getMessage());
-        }
-      }
-    }
-  }
-
-  /**
-   * 서버의 파일을 다운로드한다.
-   */
-  public static void downFile(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
-    String downFileName = EgovStringUtil.isNullToString(request.getAttribute("downFile")).replaceAll("..", "");
-    String orgFileName = EgovStringUtil.isNullToString(request.getAttribute("orgFileName")).replaceAll("..", "");
-
-	/*if ((String)request.getAttribute("downFile") == null) {
-	    downFileName = "";
-	} else {
-	    downFileName = EgovStringUtils.isNullToString(request.getAttribute("downFile"));
-	}*/
-
-	/*if ((String)request.getAttribute("orgFileName") == null) {
-	    orgFileName = "";
-	} else {
-	    orgFileName = (String)request.getAttribute("orginFile");
-	}*/
-
-    File file = new File(downFileName);
-
-    if (!file.exists()) {
-      throw new FileNotFoundException(downFileName);
-    }
-
-    if (!file.isFile()) {
-      throw new FileNotFoundException(downFileName);
-    }
-
-    byte[] b = new byte[BUFF_SIZE]; //buffer size 2K.
-    String fName = (new String(orgFileName.getBytes(), "UTF-8")).replaceAll("\r\n", "");
-    response.setContentType("application/x-msdownload");
-    response.setHeader("Content-Disposition:", "attachment; filename=" + fName);
-    response.setHeader("Content-Transfer-Encoding", "binary");
-    response.setHeader("Pragma", "no-cache");
-    response.setHeader("Expires", "0");
-
-    BufferedInputStream fin = null;
-    BufferedOutputStream outs = null;
-
-    try {
-      fin = new BufferedInputStream(new FileInputStream(file));
-      outs = new BufferedOutputStream(response.getOutputStream());
-      int read = 0;
-
-      while ((read = fin.read(b)) != -1) {
-        outs.write(b, 0, read);
-      }
-    } finally {
-      if (outs != null) {
-        try {
-          outs.close();
-        } catch (Exception ignore) {
-          LOGGER.debug("IGNORED: {}", ignore.getMessage());
-        }
-      }
-      if (fin != null) {
-        try {
-          fin.close();
-        } catch (Exception ignore) {
-          LOGGER.debug("IGNORED: {}", ignore.getMessage());
-        }
-      }
-    }
-  }
-
-  /**
    * 첨부로 등록된 파일을 서버에 업로드한다.
    *
    * @param file
@@ -281,23 +277,26 @@ public class EgovFileMngUtil {
   return map;
   }
    */
+
   /**
-   * 파일을 실제 물리적인 경로에 생성한다.
+   * 첨부파일을 서버에 저장한다.
    */
-  protected static void writeFile(MultipartFile file, String newName, String stordFilePath) throws Exception {
+  protected void writeUploadedFile(MultipartFile file, String newName, String stordFilePath) throws Exception {
     InputStream stream = null;
     OutputStream bos = null;
-    newName = EgovStringUtil.isNullToString(newName).replaceAll("..", "");
-    stordFilePath = EgovStringUtil.isNullToString(stordFilePath).replaceAll("..", "");
+    String stordFilePathReal = (stordFilePath == null ? "" : stordFilePath).replaceAll("..", "");
     try {
       stream = file.getInputStream();
-      File cFile = new File(stordFilePath);
+      File cFile = new File(stordFilePathReal);
 
       if (!cFile.isDirectory()) {
-        cFile.mkdir();
+        boolean _flag = cFile.mkdir();
+        if (!_flag) {
+          throw new IOException("Directory creation Failed ");
+        }
       }
 
-      bos = new FileOutputStream(stordFilePath + File.separator + newName);
+      bos = new FileOutputStream(stordFilePathReal + File.separator + newName);
 
       int bytesRead = 0;
       byte[] buffer = new byte[BUFF_SIZE];

@@ -44,7 +44,7 @@
 		INSERT INTO BOARD
 			(IDX, TITLE, CONTENT, VIEW_CNT, ATCH_FILE_ID, USE_YN, REGDATE, USERNAME)
 			 VALUES
-			(#{idx}, #{title}, #{content}, 0, #{atch_file_id}, 'Y', #{regdate}, #{username})
+			(#{idx}, #{title}, #{content}, 0, #{atch_file_id}, 'Y', #{regdate}, #{name})
 	</insert>
 	
 	<!-- 삭제 -->

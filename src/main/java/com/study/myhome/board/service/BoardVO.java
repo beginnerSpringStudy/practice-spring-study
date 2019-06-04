@@ -1,133 +1,131 @@
 package com.study.myhome.board.service;
 
+import com.study.myhome.common.service.Pageable;
+import egovframework.com.cmm.service.FileVO;
 import java.util.Date;
 import java.util.List;
-
 import org.apache.ibatis.type.Alias;
-
-import com.study.myhome.common.service.Pageable;
-
-import egovframework.com.cmm.service.FileVO;
 
 @Alias("BoardVO")
 public class BoardVO extends Pageable {
-	private Long idx;
 
-	private String title;
+  private Long idx;
 
-	private String content;
+  private String title;
 
-	private int view_cnt = 0;
+  private String content;
 
-	private String use_yn = "Y";
+  private int view_cnt = 0;
 
-	private String atch_file_id;
+  private String use_yn = "Y";
 
-	private String username;
-	
-	private Date regdate;
-	
-	private List<FileVO> files;
-	
-	{
-		regdate = new Date();
-	}
-	
-	public Date getRegdate() {
-		return regdate;
-	}
+  private String atch_file_id;
 
-	public void setRegdate(Date regdate) {
-		this.regdate = regdate;
-	}
+  private String username;
 
-	public Long getIdx() {
-		return idx;
-	}
+  private Date regdate;
 
-	public BoardVO() {
+  private List<FileVO> files;
 
-	}
+  {
+    regdate = new Date();
+  }
 
-	public BoardVO(String title, String content, String atchFileId) {
-		super();
-		this.title = title;
-		this.content = content;
-		this.atch_file_id = atchFileId;
-	}
+  public BoardVO() {
 
-	public BoardVO(Long idx, String title, String content, String atchFileId) {
-		super();
-		this.idx = idx;
-		this.title = title;
-		this.content = content;
-		this.atch_file_id = atchFileId;
-	}
+  }
 
-	public void setIdx(Long idx) {
-		this.idx = idx;
-	}
+  public BoardVO(String title, String content, String atchFileId) {
+    super();
+    this.title = title;
+    this.content = content;
+    this.atch_file_id = atchFileId;
+  }
 
-	public String getTitle() {
-		return title;
-	}
+  public BoardVO(Long idx, String title, String content, String atchFileId) {
+    super();
+    this.idx = idx;
+    this.title = title;
+    this.content = content;
+    this.atch_file_id = atchFileId;
+  }
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+  public Date getRegdate() {
+    return regdate;
+  }
 
-	public String getContent() {
-		return content;
-	}
+  public void setRegdate(Date regdate) {
+    this.regdate = regdate;
+  }
 
-	public void setContent(String content) {
-		this.content = content;
-	}
+  public Long getIdx() {
+    return idx;
+  }
 
-	public int getView_cnt() {
-		return view_cnt;
-	}
+  public void setIdx(Long idx) {
+    this.idx = idx;
+  }
 
-	public void setView_cnt(int view_cnt) {
-		this.view_cnt = view_cnt;
-	}
+  public String getTitle() {
+    return title;
+  }
 
-	public String getUse_yn() {
-		return use_yn;
-	}
+  public void setTitle(String title) {
+    this.title = title;
+  }
 
-	public void setUse_yn(String use_yn) {
-		this.use_yn = use_yn;
-	}
+  public String getContent() {
+    return content;
+  }
 
-	public String getAtch_file_id() {
-		return atch_file_id;
-	}
+  public void setContent(String content) {
+    this.content = content;
+  }
 
-	public void setAtch_file_id(String atch_file_id) {
-		this.atch_file_id = atch_file_id;
-	}
+  public int getView_cnt() {
+    return view_cnt;
+  }
 
-	public String getUsername() {
-		return username;
-	}
+  public void setView_cnt(int view_cnt) {
+    this.view_cnt = view_cnt;
+  }
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+  public String getUse_yn() {
+    return use_yn;
+  }
 
-	public void setAtch_file_id(List<FileVO> files) {
-		if(files != null) {
-			this.atch_file_id = files.get(0).getAtch_file_id();
-		}
-	}
+  public void setUse_yn(String use_yn) {
+    this.use_yn = use_yn;
+  }
 
-	public List<FileVO> getFiles() {
-		return files;
-	}
+  public String getAtch_file_id() {
+    return atch_file_id;
+  }
 
-	public void setFiles(List<FileVO> files) {
-		this.files = files;
-	}
-	
+  public void setAtch_file_id(String atch_file_id) {
+    this.atch_file_id = atch_file_id;
+  }
+
+  public void setAtch_file_id(List<FileVO> files) {
+    if (files != null) {
+      this.atch_file_id = files.get(0).getAtch_file_id();
+    }
+  }
+
+  public String getUsername() {
+    return username;
+  }
+
+  public void setUsername(String username) {
+    this.username = username;
+  }
+
+  public List<FileVO> getFiles() {
+    return files;
+  }
+
+  public void setFiles(List<FileVO> files) {
+    this.files = files;
+  }
+
 }
