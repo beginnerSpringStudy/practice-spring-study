@@ -25,7 +25,7 @@ public class BoardTest {
 	@Test
 	public void test1CRUDTest() throws Exception {
 		BoardVO board = new BoardVO("테스트", "테스트", null);
-		boardService.insertBoardArticle(board);
+//		boardService.insertBoardArticle(board);
 		
 		board = new BoardVO();
 		board.setIdx(1L);
@@ -37,7 +37,7 @@ public class BoardTest {
 		Assert.assertEquals(1, board.getView_cnt());
 		
 		board.setTitle("테스트2");
-		boardService.updateBoardArticle(board);
+//		boardService.updateBoardArticle(board);
 		
 		board.setIdx(1L);
 		board = boardService.selectBoardArticle(board);
