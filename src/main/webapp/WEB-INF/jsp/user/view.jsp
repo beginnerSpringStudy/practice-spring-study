@@ -13,7 +13,7 @@
     <c:choose>
         <c:when test="${user ne null }">
             <tr>
-                <td>${user.name}</td>
+                <td>${user.username}</td>
                 <td>${user.password}</td>
             </tr>
         </c:when>
@@ -26,3 +26,9 @@
     </c:choose>
     </tbody>
 </table>
+<button class="btn btn-default" onclick="goList()">목록</button>
+<script type="text/javascript">
+    function goList() {
+      location.href="${pageContext.request.contextPath}/user/list.do";
+    }
+</script>

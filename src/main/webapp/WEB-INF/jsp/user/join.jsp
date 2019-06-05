@@ -2,7 +2,7 @@
          pageEncoding="UTF-8" %>
 
 <h1>회원가입</h1>
-<form name="form" method="post">
+<form name="form" method="post" action="${pageContext.request.contextPath}/join/action.do">
     <div class="col-md-6 col-md-offset-3">
         <table class="table table-bordered">
             <tr>
@@ -15,7 +15,7 @@
             </tr>
         </table>
         <div style="text-align: right;">
-            <button class="btn" onclick="join()">회원가입</button>
+            <button class="btn btn-primary" onclick="join()">회원가입</button>
         </div>
     </div>
 </form>
@@ -27,12 +27,12 @@
     var password = $("[name='password']").val();
     // false , 0 , null, "",
     // if(name) == false
-    if (name == "" || password == "") {
+    if (name === "" || password === "") {
       alert('name / password 를 확인해주세요.');
       event.preventDefault();
       return;
     }
-    form.attr("action", "/join/action.do");
+    event.preventDefault();
     form.submit();
   }
 </script>

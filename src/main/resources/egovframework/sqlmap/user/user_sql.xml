@@ -17,25 +17,33 @@
     ) WHERE row BETWEEN #{firstIndex} + 1 AND #{firstIndex} + #{recordCountPerPage}
   </select>
 
-  <!-- 사용자 총 갯수 -->
-  <select id="selectUsersTotalCnt" resultType="Integer">
+  <!-- 사용자 입력 -->
+  <select id="selectUsersTotalCnt" parameterType="UserVO" resultType="java.lang.Integer">
     SELECT COUNT(*)
     FROM USER
+    WHERE 1=1
+    <if test="username != null and username != ''">
+      AND username = #{username}
+    </if>
   </select>
+  <!-- 권한 입력 -->
 
-  <!-- 사용자 입력 -->
+  <!-- 사용자 조회 -->
   <insert id="insertUser" parameterType="UserVO">
     INSERT INTO USER (USERNAME, PASSWORD)
     VALUES (#{username}, #{password})
   </insert>
-  <!-- 권한 입력 -->
 
-  <!-- 사용자 조회 -->
+
+  <!-- 사용자 총 갯수 -->
   <select id="selectUser" parameterType="UserVO" resultType="UserVO">
     SELECT USERNAME,
-           PASSWORD
+    PASSWORD
     FROM USER
     WHERE USERNAME = #{username}
+    <if test="password != '' and password != null">
       AND PASSWORD = #{password}
+    </if>
   </select>
 </mapper>
+

@@ -22,7 +22,7 @@ public class MenuInfoInterceptor extends WebContentInterceptor {
 
   @Override
   public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-    LOG.info("menuInterceptor postHandle");
+    LOG.info("menuInterceptor postHandle : {}", request.getPathInfo());
 
     MenuVO menu;
     if (EgovUserDetailsHelper.isAuthenticated()) {

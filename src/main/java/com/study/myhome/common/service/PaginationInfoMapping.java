@@ -11,7 +11,7 @@ public class PaginationInfoMapping {
   /**
    * 페이징 값 셋팅을 위한 공통 메서드
    */
-  public void setPaginationInfo(PaginationInfo paginationInfo, Object obj) throws Exception {
+  public void setPaginationInfo(PaginationInfo paginationInfo, Pageable obj) throws Exception {
 
     if (paginationInfo == null || obj == null) {
       throw new Exception("parameter가 올바르지 않습니다.");
@@ -27,10 +27,10 @@ public class PaginationInfoMapping {
       }
       if (fi.getName().equals("pageSize")) {
         m = obj.getClass().getMethod("getPageSize", null);
-        paginationInfo.setRecordCountPerPage(Integer.parseInt(m.invoke(obj).toString()));
+        paginationInfo.setPageSize(Integer.parseInt(m.invoke(obj).toString()));
       }
-      if (fi.getName().equals("pageUnit")) {
-        m = obj.getClass().getMethod("getPageUnit", null);
+      if (fi.getName().equals("recordCountPerPage")) {
+        m = obj.getClass().getMethod("getRecordCountPerPage", null);
         paginationInfo.setRecordCountPerPage(Integer.parseInt(m.invoke(obj).toString()));
       }
     }

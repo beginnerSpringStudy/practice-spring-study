@@ -14,12 +14,16 @@ import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
 import java.util.HashMap;
 import java.util.Map;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class UserServiceImpl implements UserService {
+
+  private static final Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
 
   @Autowired
   private UserDAO userDAO;
@@ -35,16 +39,17 @@ public class UserServiceImpl implements UserService {
    *
    * @author 정명성 create date : 2016. 10. 5.
    */
+  @Deprecated
   public Map<String, Object> findUsers(UserVO userVO) throws Exception {
     Map<String, Object> map = new HashMap<String, Object>();
     map.put("list", userDAO.findUsers(userVO));
-    map.put("totalCnt", userDAO.getTotalUser());
+    map.put("totalCnt", userDAO.getTotalUser(userVO));
     return map;
   }
 
   @Transactional(readOnly = true)
   public ListObject<UserVO> findUsers(UserVO userVO, PaginationInfo paginationInfo) throws Exception {
-    return new ListObjectImpl<>(userDAO.findUsers(userVO), userDAO.getTotalUser(), paginationInfo);
+    return new ListObjectImpl<>(userDAO.findUsers(userVO), userDAO.getTotalUser(userVO), paginationInfo);
   }
 
   /**
@@ -54,12 +59,13 @@ public class UserServiceImpl implements UserService {
    */
   @Transactional
   public void insertUsers(UserVO userVO, UserAuthorityVO userAuthorityVO) throws Exception {
+    log.info("dddd");
     try {
       userDAO.insertUser(userVO);
       userAuthorityService.insertUserAuthority(userAuthorityVO);
     } catch (Exception e) {
       e.printStackTrace();
-      throw (BadRequestException) e;
+      throw e;
     }
   }
 

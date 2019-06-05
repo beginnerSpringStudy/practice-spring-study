@@ -4,6 +4,7 @@ import com.study.myhome.common.service.impl.CommonDAO;
 import com.study.myhome.user.service.UserVO;
 import java.util.List;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public class UserDAO extends CommonDAO {
@@ -24,8 +25,8 @@ public class UserDAO extends CommonDAO {
    * @author 정명성
    * create date : 2016. 10. 4.
    */
-  public Integer getTotalUser() throws Exception {
-    return sessionTemplate.selectOne("UserDAO.selectUsersTotalCnt");
+  public Integer getTotalUser(UserVO userVO) throws Exception {
+    return sessionTemplate.selectOne("UserDAO.selectUsersTotalCnt", userVO);
   }
 
   /**

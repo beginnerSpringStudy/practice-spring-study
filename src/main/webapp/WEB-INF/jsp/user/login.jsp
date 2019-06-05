@@ -16,7 +16,7 @@
             </table>
             <div style="text-align: right;">
                 <a class="btn btn-warning" href="/join.do">회원가입</a>
-                <button class="btn" onclick="login()">로그인</button>
+                <button class="btn btn-success" onclick="login()">로그인</button>
             </div>
         </div>
     </form>

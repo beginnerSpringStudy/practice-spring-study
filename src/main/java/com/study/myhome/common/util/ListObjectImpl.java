@@ -2,6 +2,7 @@ package com.study.myhome.common.util;
 
 import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
 import java.util.List;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public class ListObjectImpl<T> implements ListObject<T> {
 
@@ -15,8 +16,8 @@ public class ListObjectImpl<T> implements ListObject<T> {
     super();
     this.list = list;
     this.totalCnt = totalCnt;
-    // 토탈 카운트 갯수 추가
     paginationInfo.setTotalRecordCount(this.totalCnt);
+    System.out.println(">>>>>>>>>>>>>>>>>>> " + ToStringBuilder.reflectionToString(paginationInfo));
     this.paginationInfo = paginationInfo;
   }
 

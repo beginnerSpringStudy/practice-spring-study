@@ -6,9 +6,6 @@ public class Pageable {
   // 페이지 인덱스
   private int p = 1;
 
-  // 페이지 갯수
-  private int PageUnit = 10;
-
   // 페이지당 게시물 수
   private int pageSize = 10;
 
@@ -29,14 +26,6 @@ public class Pageable {
     this.p = p;
   }
 
-  public int getPageUnit() {
-    return PageUnit;
-  }
-
-  public void setPageUnit(int pageUnit) {
-    PageUnit = pageUnit;
-  }
-
   public int getPageSize() {
     return pageSize;
   }
@@ -44,7 +33,6 @@ public class Pageable {
   public void setPageSize(int pageSize) {
     this.pageSize = pageSize;
   }
-
 
   public int getFirstIndex() {
     return firstIndex;

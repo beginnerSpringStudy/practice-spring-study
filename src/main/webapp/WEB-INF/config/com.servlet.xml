@@ -58,8 +58,10 @@
     <!-- 메뉴 구하기 -->
     <mvc:interceptor>
       <mvc:mapping path="/**"/>
-      <mvc:exclude-mapping path="/redis/**"/>
       <mvc:exclude-mapping path="**/action.do"/>
+      <mvc:exclude-mapping path="**/insert.do"/>
+      <mvc:exclude-mapping path="**/update.do"/>
+      <mvc:exclude-mapping path="**/delete.do"/>
       <bean class="com.study.myhome.common.interceptor.MenuInfoInterceptor"/>
     </mvc:interceptor>
     <!-- 권한 체크 -->

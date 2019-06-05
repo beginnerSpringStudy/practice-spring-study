@@ -10,8 +10,8 @@
     <tr>
     </thead>
     <c:forEach items="${listObj.list}" var="list">
-        <tr onclick="getUser('${list.name}')" style="cursor: pointer;">
-            <td>${list.name}</td>
+        <tr onclick="getUser('${list.username}')" style="cursor: pointer;">
+            <td>${list.username}</td>
             <td>${fn:substring(list.password,0,2)}**</td>
         </tr>
     </c:forEach>
@@ -21,7 +21,7 @@
     <!--// 페이징 부분 -->
     <div class="paging">
         <ul>
-            <ui:pagination paginationInfo="${paginationInfo}" type="text" jsFunction="getPageList"/>
+            <ui:pagination paginationInfo="${listObj.paginationInfo}" type="text" jsFunction="getPageList"/>
         </ul>
     </div>
     <!-- 페이징 부분 //-->

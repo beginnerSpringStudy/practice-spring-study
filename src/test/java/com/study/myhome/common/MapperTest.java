@@ -32,5 +32,6 @@ public class MapperTest {
     mapper.setPaginationInfo(paginationInfo, userVO);
 
     System.out.println(ToStringBuilder.reflectionToString(paginationInfo));
+    assert paginationInfo.getCurrentPageNo() == userVO.getP();
   }
 }
