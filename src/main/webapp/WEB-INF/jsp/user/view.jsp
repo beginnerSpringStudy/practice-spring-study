@@ -1,0 +1,34 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<h1>회원 정보</h1>
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th>name</th>
+        <th>password</th>
+    <tr>
+    </thead>
+    <tbody>
+    <c:choose>
+        <c:when test="${user ne null }">
+            <tr>
+                <td>${user.username}</td>
+                <td>${user.password}</td>
+            </tr>
+        </c:when>
+
+        <c:otherwise>
+            <tr>
+                <td colspan="2">존재하지 않습니다.</td>
+            </tr>
+        </c:otherwise>
+    </c:choose>
+    </tbody>
+</table>
+<button class="btn btn-default" onclick="goList()">목록</button>
+<script type="text/javascript">
+    function goList() {
+      location.href="${pageContext.request.contextPath}/user/list.do";
+    }
+</script>

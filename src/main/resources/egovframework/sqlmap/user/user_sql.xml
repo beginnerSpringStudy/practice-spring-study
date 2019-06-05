@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="UserDAO">
+
+  <!-- 사용자 조회 -->
+  <select id="selectUsers" parameterType="UserVO" resultType="UserVO">
+    SELECT * FROM (
+    SELECT ROWNUM() row,
+    USERNAME,
+    PASSWORD,
+    FORMATDATETIME(JOIN_DATE, 'yyyy-MM-dd') as joinDate
+    FROM USER
+    <if test="username != null and username != ''">
+      WHERE username = #{username}
+    </if>
+        ORDER BY JOIN_DATE DESC
+    ) WHERE row BETWEEN #{firstIndex} + 1 AND #{firstIndex} + #{recordCountPerPage}
+  </select>
+
+  <!-- 사용자 입력 -->
+  <select id="selectUsersTotalCnt" parameterType="UserVO" resultType="java.lang.Integer">
+    SELECT COUNT(*)
+    FROM USER
+    WHERE 1=1
+    <if test="username != null and username != ''">
+      AND username = #{username}
+    </if>
+  </select>
+  <!-- 권한 입력 -->
+
+  <!-- 사용자 조회 -->
+  <insert id="insertUser" parameterType="UserVO">
+    INSERT INTO USER (USERNAME, PASSWORD)
+    VALUES (#{username}, #{password})
+  </insert>
+
+
+  <!-- 사용자 총 갯수 -->
+  <select id="selectUser" parameterType="UserVO" resultType="UserVO">
+    SELECT USERNAME,
+    PASSWORD
+    FROM USER
+    WHERE USERNAME = #{username}
+    <if test="password != '' and password != null">
+      AND PASSWORD = #{password}
+    </if>
+  </select>
+</mapper>
+
