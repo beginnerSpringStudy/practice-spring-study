@@ -12,7 +12,7 @@
                     [${info.regdate}]
                 </div>
                 <div class="col-md-2">
-                    read : ${info.view_cnt}
+                    read : ${info.viewCnt}
                 </div>
             </div>
 
@@ -45,7 +45,7 @@
 <form name="frm" method="post">
     <input type="hidden" name="p" value="${boardVO.p }"/>
     <input type="hidden" name="idx" value="${info.idx }"/>
-    <input type="hidden" name="atch_file_id" value="${info.atch_file_id }"/>
+    <input type="hidden" name="atchFileId" value="${info.atchFileId }"/>
 </form>
 
 <button class="btn btn-default" onclick="goList()">목록</button>

@@ -31,8 +31,7 @@ public class BoardServiceImpl implements BoardService {
   public ListObject<BoardVO> selectBoardList(BoardVO boardVO, PaginationInfo paginationInfo) throws Exception {
     List<BoardVO> list = boardDAO.selectBoardList(boardVO);
     int totalCount = boardDAO.selectBoardListCnt(boardVO);
-    ListObject<BoardVO> listObj = new ListObjectImpl<BoardVO>(list, totalCount, paginationInfo);
-    return listObj;
+    return new ListObjectImpl<BoardVO>(list, totalCount, paginationInfo);
   }
 
   /**
@@ -40,7 +39,7 @@ public class BoardServiceImpl implements BoardService {
    */
   public BoardVO selectBoardArticle(BoardVO boardVO) throws Exception {
     boardVO = boardDAO.selectBoardArticle(boardVO);
-    boardVO.setFiles(fileMngService.selectFileInfs(new FileVO(boardVO.getAtch_file_id())));
+    boardVO.setFiles(fileMngService.selectFileInfs(new FileVO(boardVO.getAtchFileId())));
     return boardVO;
   }
 

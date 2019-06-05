@@ -5,14 +5,16 @@
 <table class="table table-bordered">
     <thead>
     <tr>
-        <th>name</th>
-        <th>password</th>
+        <th>이름</th>
+        <th>비밀번호</th>
+        <th>가입일</th>
     <tr>
     </thead>
     <c:forEach items="${listObj.list}" var="list">
         <tr onclick="getUser('${list.username}')" style="cursor: pointer;">
             <td>${list.username}</td>
             <td>${fn:substring(list.password,0,2)}**</td>
+            <td>${list.joinDate}</td>
         </tr>
     </c:forEach>
 </table>

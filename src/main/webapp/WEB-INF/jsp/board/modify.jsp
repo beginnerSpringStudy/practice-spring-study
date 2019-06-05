@@ -23,7 +23,7 @@
                         <div class="col-md-8">
                             <c:forEach items="${info.files }" var="file">
                                 <p>
-                                    <a href="/cmm/fms/FileDown.do?atchFileId=${file.atch_file_id }&fileSn=${file.file_sn}" title="${file.orignl_file_nm }">${file.orignl_file_nm }</a>
+                                    <a href="/cmm/fms/FileDown.do?atchFileId=${file.atchFileId }&fileSn=${file.file_sn}" title="${file.orignl_file_nm }">${file.orignl_file_nm }</a>
                                 </p>
                             </c:forEach>
                         </div>

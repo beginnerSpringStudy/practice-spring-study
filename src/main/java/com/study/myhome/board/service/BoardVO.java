@@ -2,12 +2,13 @@ package com.study.myhome.board.service;
 
 import com.study.myhome.common.service.Pageable;
 import egovframework.com.cmm.service.FileVO;
-import java.util.Date;
 import java.util.List;
 import org.apache.ibatis.type.Alias;
 
 @Alias("BoardVO")
 public class BoardVO extends Pageable {
+
+  private Long row;
 
   private Long idx;
 
@@ -15,21 +16,17 @@ public class BoardVO extends Pageable {
 
   private String content;
 
-  private int view_cnt = 0;
+  private int viewCnt = 0;
 
-  private String use_yn = "Y";
+  private String useYn = "Y";
 
-  private String atch_file_id;
+  private String atchFileId;
 
   private String username;
 
-  private Date regdate;
+  private String regdate;
 
   private List<FileVO> files;
-
-  {
-    regdate = new Date();
-  }
 
   public BoardVO() {
 
@@ -39,7 +36,7 @@ public class BoardVO extends Pageable {
     super();
     this.title = title;
     this.content = content;
-    this.atch_file_id = atchFileId;
+    this.atchFileId = atchFileId;
   }
 
   public BoardVO(Long idx, String title, String content, String atchFileId) {
@@ -47,14 +44,14 @@ public class BoardVO extends Pageable {
     this.idx = idx;
     this.title = title;
     this.content = content;
-    this.atch_file_id = atchFileId;
+    this.atchFileId = atchFileId;
   }
 
-  public Date getRegdate() {
+  public String getRegdate() {
     return regdate;
   }
 
-  public void setRegdate(Date regdate) {
+  public void setRegdate(String regdate) {
     this.regdate = regdate;
   }
 
@@ -82,33 +79,33 @@ public class BoardVO extends Pageable {
     this.content = content;
   }
 
-  public int getView_cnt() {
-    return view_cnt;
+  public int getViewCnt() {
+    return viewCnt;
   }
 
-  public void setView_cnt(int view_cnt) {
-    this.view_cnt = view_cnt;
+  public void setViewCnt(int viewCnt) {
+    this.viewCnt = viewCnt;
   }
 
-  public String getUse_yn() {
-    return use_yn;
+  public String getUseYn() {
+    return useYn;
   }
 
-  public void setUse_yn(String use_yn) {
-    this.use_yn = use_yn;
+  public void setUseYn(String useYn) {
+    this.useYn = useYn;
   }
 
-  public String getAtch_file_id() {
-    return atch_file_id;
+  public String getAtchFileId() {
+    return atchFileId;
   }
 
-  public void setAtch_file_id(String atch_file_id) {
-    this.atch_file_id = atch_file_id;
+  public void setAtchFileId(String atchFileId) {
+    this.atchFileId = atchFileId;
   }
 
   public void setAtch_file_id(List<FileVO> files) {
     if (files != null) {
-      this.atch_file_id = files.get(0).getAtch_file_id();
+      this.atchFileId = files.get(0).getAtch_file_id();
     }
   }
 
@@ -128,4 +125,11 @@ public class BoardVO extends Pageable {
     this.files = files;
   }
 
+  public Long getRow() {
+    return row;
+  }
+
+  public void setRow(Long row) {
+    this.row = row;
+  }
 }

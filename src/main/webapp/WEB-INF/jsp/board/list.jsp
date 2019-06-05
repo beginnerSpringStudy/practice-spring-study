@@ -10,24 +10,20 @@
     </colgroup>
     <thead>
     <tr>
-        <th>No</th>
-        <th>title</th>
-        <th>regdate</th>
-        <th>read</th>
+        <th>번호</th>
+        <th>제목</th>
+        <th>등록일</th>
+        <th>조회수</th>
     <tr>
     </thead>
     <c:choose>
         <c:when test="${not empty listObj.list }">
             <c:forEach items="${listObj.list}" var="list">
                 <tr onclick="goView('${list.idx}')" style="cursor: pointer;">
-                    <td>${list.idx}</td>
+                    <td>${list.row}</td>
                     <td>${list.title }</td>
-                    <td>
-                            ${list.regdate }
-                    </td>
-                    <td>
-                            ${list.view_cnt }
-                    </td>
+                    <td>${list.regdate}</td>
+                    <td>${list.viewCnt }</td>
                 </tr>
             </c:forEach>
         </c:when>

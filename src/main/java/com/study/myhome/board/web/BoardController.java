@@ -2,9 +2,9 @@ package com.study.myhome.board.web;
 
 import com.study.myhome.board.service.BoardService;
 import com.study.myhome.board.service.BoardVO;
+import com.study.myhome.common.service.PaginationInfoMapping;
 import com.study.myhome.common.util.ListObject;
 import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
-import org.apache.commons.beanutils.BeanUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,10 +23,13 @@ public class BoardController {
   @Autowired
   private BoardService boardService;
 
+  @Autowired
+  private PaginationInfoMapping paginationInfoMapping;
+
   @RequestMapping(value = "/board/list.do")
   public String boardList(@ModelAttribute BoardVO boardVO, PaginationInfo paginationInfo, ModelMap modelMap) throws Exception {
 
-    BeanUtils.copyProperties(paginationInfo, boardVO);
+    paginationInfoMapping.setPaginationInfo(paginationInfo, boardVO);
 
     // list와 전체 페이징 갯수를 가져와야 한다.
     ListObject<BoardVO> listObj = boardService.selectBoardList(boardVO, paginationInfo);

@@ -33,7 +33,7 @@ public class BoardTest {
     // 게시물 확인
     Assert.assertNotNull(boardService.selectBoardArticle(board));
     // 조회수
-    Assert.assertEquals(1, board.getView_cnt());
+    Assert.assertEquals(1, board.getViewCnt());
 
     board.setTitle("테스트2");
     //		boardService.updateBoardArticle(board);

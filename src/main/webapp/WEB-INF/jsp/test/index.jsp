@@ -6,12 +6,9 @@
 <script type="text/javascript">
   function ajaxTest() {
     $.ajax({
-      type: "GET" //"POST", "GET"
-      ,
-      url: "/index.ajax" //Request URL
-      ,
-      dataType: "json" //전송받을 데이터의 타입
-      ,
+      type: "GET", //"POST", "GET"
+      url: "/index.ajax", //Request URL
+      dataType: "json", //전송받을 데이터의 타입
       contentType: "application/x-www-form-urlencoded; charset=UTF-8",
       error: function (request, status, error) {
         //통신 에러 발생시 처리

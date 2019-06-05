@@ -16,7 +16,7 @@ public class UserVO extends Pageable {
   private String password;
 
   // 가입 날짜
-  private Date joinDate;
+  private String joinDate;
 
   // 사용자 권한
   private UserAuthorityVO userAuthority;
@@ -33,14 +33,14 @@ public class UserVO extends Pageable {
     this.userAuthority = userAuthority;
   }
 
-  public UserVO() {
-    this.joinDate = new Date();
-  }
-
   public UserVO(String username, String password) {
     this.username = username;
     this.password = password;
-    this.joinDate = new Date();
+    this.joinDate = new Date().toString();
+  }
+
+  public UserVO() {
+
   }
 
   public UserAuthorityVO getUserAuthority() {
@@ -67,10 +67,10 @@ public class UserVO extends Pageable {
     this.password = password;
   }
 
-  public Date getJoinDate() {
+  public String getJoinDate() {
     return joinDate;
   }
-  
+
   @Override
   public String toString() {
     return "UserVO{" +

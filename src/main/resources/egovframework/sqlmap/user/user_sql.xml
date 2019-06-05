@@ -9,11 +9,12 @@
     SELECT ROWNUM() row,
     USERNAME,
     PASSWORD,
-    JOIN_DATE
+    FORMATDATETIME(JOIN_DATE, 'yyyy-MM-dd') as joinDate
     FROM USER
     <if test="username != null and username != ''">
       WHERE username = #{username}
     </if>
+        ORDER BY JOIN_DATE DESC
     ) WHERE row BETWEEN #{firstIndex} + 1 AND #{firstIndex} + #{recordCountPerPage}
   </select>
 
