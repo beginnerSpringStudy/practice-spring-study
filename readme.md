@@ -1,8 +1,8 @@
-#스프링 초보 스터디
+# 스프링 초보 스터디
 
 전자정부프레임워크 + 일반 기능 추가.
 
-#target 
+# target 
 
 windows, eclipse 사용자
 
