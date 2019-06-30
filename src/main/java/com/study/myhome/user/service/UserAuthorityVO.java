@@ -2,13 +2,21 @@ package com.study.myhome.user.service;
 
 import com.study.myhome.enums.Authority;
 import com.study.myhome.menu.service.MenuVO;
+
+import java.io.Serializable;
+
 import javax.validation.constraints.NotNull;
 import org.apache.ibatis.type.Alias;
 
 @Alias("UserAuthorityVO")
-public class UserAuthorityVO {
+public class UserAuthorityVO implements Serializable {
 
-  @NotNull
+/**
+	 * 
+	 */
+	private static final long serialVersionUID = -496000620423956080L;
+
+@NotNull
   private String username;
 
   private Authority authority = Authority.MEMBER;

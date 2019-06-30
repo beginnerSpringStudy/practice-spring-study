@@ -178,7 +178,9 @@ public class EgovFileMngUtil {
     String atchFileIdString = "";
 
     if ("".equals(storePath) || storePath == null) {
-      storePathString = propertyService.getString("Globals.fileStorePath");
+//      storePathString = propertyService.getString("Globals.fileStorePath");
+    	storePathString = "/Users/jms/backup";
+      System.out.println("fileStorePath  : " + propertyService.getString("Globals.fileStorePath"));
     } else {
       storePathString = propertyService.getString(storePath);
 

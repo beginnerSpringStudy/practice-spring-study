@@ -1,9 +1,11 @@
 package com.study.myhome.menu.service;
 
+import java.io.Serializable;
+
 import org.apache.ibatis.type.Alias;
 
 @Alias("MenuDetailVO")
-public class MenuDetailVO {
+public class MenuDetailVO implements Serializable {
 
   private int menuIdx;
 

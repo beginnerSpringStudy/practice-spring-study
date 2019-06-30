@@ -27,7 +27,7 @@
            WHERE USE_YN = 'Y'
            ORDER BY IDX DESC
          )
-    LIMIT #{firstIndex} + 1 , #{firstIndex} + #{recordCountPerPage}
+    LIMIT #{firstIndex} , #{firstIndex} + #{recordCountPerPage}
 
   </select>
 
@@ -55,7 +55,7 @@
   <insert id="insertBoardArticle" parameterType="BoardVO">
     INSERT INTO BOARD
       (IDX, TITLE, CONTENT, VIEW_CNT, ATCH_FILE_ID, USE_YN, USERNAME)
-    VALUES (#{idx}, #{title}, #{content}, 0, #{atchFileId}, 'Y', #{name})
+    VALUES (#{idx}, #{title}, #{content}, 0, #{atchFileId}, 'Y', #{username})
   </insert>
 
   <!-- 삭제 -->
